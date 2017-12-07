@@ -7,7 +7,9 @@ This could be useful for:
 - language learners looking to make an Anki deck out of phrases from a movie or TV show.
 - people looking for an easier way to edit and export a large number of smaller clips from a larger file
 
-The script simply prompts you for a video/audio file, then an .srt subtitle file. Then it takes the timecodes out of the .srt file and outputs a seperate video file for each subtitle duration.
+I reccomend [Subtitle Edit](http://www.nikse.dk/SubtitleEdit/) for making subtitle files.
+
+The script simply prompts you for a video/audio file, then an .srt subtitle file. Then it takes the timecodes out of the .srt file and outputs a seperate video/audio file for each subtitle duration.
 
 **requires ffmpeg**
 
