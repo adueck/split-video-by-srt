@@ -1,7 +1,7 @@
 #!/bin/bash
 
+read -e -p "Enter name of video or audio file to split into chunks: " fileToCut 
 read -e -p "Enter name of subtitle file: " subtitleFile
-read -e -p "Enter name of video or audio file to cut: " fileToCut 
 fileName=$(basename "$fileToCut")
 fileExt="${fileName##*.}"
 fileName="${fileName%.*}"
