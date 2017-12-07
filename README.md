@@ -13,4 +13,4 @@ The script simply prompts you for a video/audio file, then an .srt subtitle file
 
 **requires ffmpeg**
 
-This works, but it is very beta. More features and functionality to come.
+This works, but it is beta. More features and functionality to come.
