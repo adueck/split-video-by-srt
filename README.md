@@ -1,6 +1,6 @@
 # split-video-by-srt
 
-You can use this bash script to split a video or audio file up into seperate chunks based on timecodes from an .srt subtitle file.
+You can use this bash script to automatically split video files up into seperate chunks based on timecodes from an .srt subtitle file.
 
 This could be useful for:
 
