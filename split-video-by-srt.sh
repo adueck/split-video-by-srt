@@ -25,21 +25,3 @@ then
 else
   echo "no file found there";
 fi
-
-
-
-# read -e -p "Enter file to cut: " fileToCut 
-
-# read -p "Enter start time: " startTime
-
-# read -p "Enter end time: " endTime
-
-# startSeconds=$(date -u -d "$startTime" +"%s")
-# endSeconds=$(date -u -d "$endTime" +"%s")
-
-# length=$(date -u -d "0 $endSeconds sec - $startSeconds sec" +"%H:%M:%S")
-
-# echo $length
-
-# ffmpeg -i $fileToCut -ss $startTime -t $length -async 1 cut.mkv
-
