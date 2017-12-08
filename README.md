@@ -14,3 +14,5 @@ The script simply prompts you for a video file, then an .srt subtitle file. Then
 **requires ffmpeg**
 
 More features and functionality to come. Contributions welcome.
+
+**current limitation:** you need to run this script in the same folder as the video file you are cutting. (Will fix this soon)
