@@ -42,10 +42,10 @@ do
   if [ ! -z "$format" ]
   then 
     echo "Cutting segment no. ${k} of ${numOfClips} and exporting to ${format}..."
-    ffmpeg -v warning -i "$fileToCut" -ss "${startTimeForFfmpeg[j]}" -t "${timeDiff[j]}" -strict -2 $fileName${k}.$format
+    ffmpeg -v warning -i "$fileToCut" -ss "${startTimeForFfmpeg[j]}" -t "${timeDiff[j]}" -strict -2 "$fileName${k}.$format"
   else
     echo "Cutting segment no. ${k} of ${numOfClips} and exporting to original ${fileExt} format..."
-    ffmpeg -v warning -i "$fileToCut" -ss "${startTimeForFfmpeg[j]}" -t "${timeDiff[j]}" -strict -2 $fileName${k}.$fileExt
+    ffmpeg -v warning -i "$fileToCut" -ss "${startTimeForFfmpeg[j]}" -t "${timeDiff[j]}" -strict -2 "$fileName${k}.$fileExt"
   fi
 done
 
