@@ -15,3 +15,4 @@ The script simply prompts you for a video file, then an .srt subtitle file. Then
 
 More features and functionality to come. Contributions welcome.
 
+**current limitation:** does not work with video file names that include spaces. (Will be fixed soon) 
