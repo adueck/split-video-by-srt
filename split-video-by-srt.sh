@@ -2,6 +2,7 @@
 
 read -e -p "Enter name of video file to split into chunks: " fileToCut
 read -e -p "Enter name of subtitle file: " subtitleFile
+read -e -p "Enter file format for output (leave blank to keep original format): " format
 fileName=$(basename "$fileToCut")
 fileExt="${fileName##*.}"
 fileName="${fileName%.*}"
@@ -33,10 +34,19 @@ echo "Ready to start cutting."
 
 # loop through the arrays created earlier and cut each clip with ffmpeg
 arrayLength=${#startTimeForFfmpeg[@]}
+numOfClips=`expr $arrayLength + 1`
 for (( j=0; j<${arrayLength}; j++));
 do
-  
   k=`expr $j + 1`
-  ffmpeg -i $fileToCut -ss "${startTimeForFfmpeg[j]}" -t "${timeDiff[j]}" -strict -2 $fileName${k}.$fileExt
-
+  # if user specified a format, use that for the output, if not use original format
+  if [ ! -z "$format" ]
+  then 
+    echo "Cutting segment no. ${k} of ${numOfClips} and exporting to ${format}..."
+    ffmpeg -v warning -i $fileToCut -ss "${startTimeForFfmpeg[j]}" -t "${timeDiff[j]}" -strict -2 $fileName${k}.$format
+  else
+    echo "Cutting segment no. ${k} of ${numOfClips} and exporting to original ${fileExt} format..."
+    ffmpeg -v warning -i $fileToCut -ss "${startTimeForFfmpeg[j]}" -t "${timeDiff[j]}" -strict -2 $fileName${k}.$fileExt
+  fi
 done
+
+echo "Finished. Files are available in the current directory."
