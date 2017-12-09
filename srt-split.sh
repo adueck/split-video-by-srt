@@ -57,7 +57,7 @@ do
   if [ $? -eq 0 ]; then
     echo OK
   else
-    echo ERRR
+    echo ERR
     exportErrorOccured=true
   fi
 done
