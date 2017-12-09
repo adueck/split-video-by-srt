@@ -51,7 +51,7 @@ do
     outputFile="$fileName-clips/${k}-$fileName.$format"
     else
     echo -n "Cutting segment no. ${k} of ${numOfClips} and exporting to original ${fileExt} format..."
-    outputFile="$fileName-clips/${k}-$fileName$.$fileExt"
+    outputFile="$fileName-clips/${k}-$fileName.$fileExt"
   fi
   ffmpeg -v warning -i "$fileToCut" -ss "${startTimeForFfmpeg[j]}" -t "${timeDiff[j]}" "$outputFile"
   if [ $? -eq 0 ]; then
