@@ -38,7 +38,7 @@ mkdir "$fileName-clips"
 
 # loop through the arrays created earlier and cut each clip with ffmpeg
 arrayLength=${#startTimeForFfmpeg[@]}
-numOfClips=`expr $arrayLength + 1`
+numOfClips=`expr $arrayLength`
 exportErrorOccured=false
 for (( j=0; j<${arrayLength}; j++));
 do
