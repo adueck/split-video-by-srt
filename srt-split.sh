@@ -40,9 +40,9 @@ mkdir "$fileName-clips"
 arrayLength=${#startTimeForFfmpeg[@]}
 numOfClips=`expr $arrayLength`
 exportErrorOccured=false
-for (( j=0; j<${arrayLength}; j++));
+for k in `seq -w ${arrayLength}`
 do
-  k=`expr $j + 1`
+  j=`expr $k - 1`
   # if user specified a format, use that for the output, if not use original format
   if [ ! -z "$format" ]
   # assign the proper format to the output file to be passed to ffmpeg
