@@ -1,11 +1,28 @@
 #!/bin/bash
 
-read -e -p "Enter name of video file to split into chunks: " fileToCut
-read -e -p "Enter name of subtitle file: " subtitleFile
-read -e -p "Enter file format for output (leave blank to keep original format): " format
+if [ $# -eq 0 ]
+  then
+    echo "Script to split video files into chunks based on .srt timecodes"
+    echo ""
+    echo "usage: srt-split.sh [video file] [subtitle file] (optional)[output format]"
+    echo "If no output format is supplied, cut files will be saved in the same format as the original file."
+    exit 0
+fi
+
+fileToCut=$1
+subtitleFile=$2
+format=$3
+
 fileName=$(basename "$fileToCut")
 fileExt="${fileName##*.}"
 fileName="${fileName%.*}"
+
+if [ ! -f "$fileToCut" ]
+then
+  echo "ERR: no file found at $fileToCut"
+  echo "usage: srt-split.sh [video file] [subtitle file] (optional)[output format]"
+  exit 1
+fi
 
 if [ -f "$subtitleFile" ]
 then
@@ -16,19 +33,21 @@ then
    # extract start and end timecodes from each line of srt file
    startTime=`echo $line | egrep -o "^[0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}"`
    endTime=`echo $line | egrep -o " [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}"`
-   
-   # format start time for Ffmpeg 
+
+   # format start time for Ffmpeg
    startTimeForFfmpeg[i]=`echo $startTime | sed 's/,/./'`
-   
+
    # put timecode string in calculatable date format and then calculate the length of the clip
    startDate=$(date -u -d "$startTime" +"%s.%N")
    endDate=$(date -u -d "$endTime" +"%s.%N")
    timeDiff[i]=$(date -u -d "0 $endDate sec - $startDate sec" +"%H:%M:%S.%N")
-   
+
    i=$[i+1]
   done < <(egrep "[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" "$subtitleFile")
 else
-  echo "no file found there";
+  echo "ERR: no file found at $subtitleFile"
+  echo "usage: srt-split.sh [video file] [subtitle file] (optional)[output format]"
+  exit 1
 fi
 echo "Ready to start cutting."
 echo ""
@@ -46,7 +65,7 @@ do
   # if user specified a format, use that for the output, if not use original format
   if [ ! -z "$format" ]
   # assign the proper format to the output file to be passed to ffmpeg
-  then 
+  then
     echo -n "Cutting segment no. ${k} of ${numOfClips} and exporting to ${format}..."
     outputFile="$fileName-clips/${k}-$fileName.$format"
     else
@@ -63,9 +82,7 @@ do
 done
 
 if [ "$exportErrorOccured" = false ]; then
-  echo "Finished. Files are available in $PWD/$fileName-clips."
+  echo "Finished. Files are available in $PWD/$fileName-clips"
 else
   echo "There were errors with the ffmpeg processing. Please see log above."
 fi
-
-
