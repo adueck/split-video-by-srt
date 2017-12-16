@@ -11,7 +11,7 @@ I reccomend [Subtitle Edit](http://www.nikse.dk/SubtitleEdit/) for making subtit
 
 `usage: .\srt-split.sh [video file] [subtitle file] (optional)[output format]`
 
-This scripts takes the timecodes out of the .srt file and outputs a seperate video file for each subtitle duration. You are also given an option to export the clips to the file format of your choice. If no output format is supplied, the clips will be exported in the same format as the original.
+This script takes the timecodes out of the .srt file and outputs a seperate video file for each subtitle duration. You are also given an option to export the clips to the file format of your choice. If no output format is supplied, the clips will be exported in the same format as the original.
 
 **requires ffmpeg**
 
